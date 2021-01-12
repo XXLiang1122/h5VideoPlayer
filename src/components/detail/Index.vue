@@ -48,6 +48,7 @@ export default defineComponent({
     const router = useRouter()
     const info = ref<Partial<VideoInfo>>({})
     const score = computed(() => Math.floor((Number(info.value.score) / 2) * 100) / 100)
+    const isIos = /iphone/i.test(navigator.userAgent)
 
     const updateVideoInfo = () => {
       info.value = store.state.videoInfo
@@ -57,6 +58,10 @@ export default defineComponent({
     onActivated(updateVideoInfo)
 
     const watchVideo = (url: string) => {
+      if (isIos) {
+        window.open(url, '_blank')
+        return
+      }
       store.commit('updateVideoUrl', url)
       router.push('/video')
     }
