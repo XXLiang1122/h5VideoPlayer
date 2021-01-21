@@ -39,13 +39,14 @@ import {
 import { useRouter } from 'vue-router'
 import { Dialog, ImagePreview } from 'vant'
 import { VideoInfo } from '../../types/video'
-import store from '../../store/index'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'Detail',
 
   setup: () => {
     const router = useRouter()
+    const store = useStore()
     const info = ref<Partial<VideoInfo>>({})
     const score = computed(() => Math.floor((Number(info.value.score) / 2) * 100) / 100)
     const isIos = /iphone/i.test(navigator.userAgent)

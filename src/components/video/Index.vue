@@ -22,13 +22,14 @@ import {
 } from 'vue'
 import { useRouter } from 'vue-router'
 import Hls from 'hls.js'
-import store from '../../store/index'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'Video',
 
   setup: () => {
     const router = useRouter()
+    const store = useStore()
     const url = computed(() => store.state.videoUrl)
     const videoEle = ref<null | HTMLVideoElement>(null);
 
